@@ -4,6 +4,7 @@ const Card = () => {
 
   return (
     <>
+    //escreva um código para a tela ficar em dark mode
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
       <div className={`card`}>

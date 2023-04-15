@@ -13,6 +13,7 @@ function AuthProvider({ children }) {
         password,
       });
       const { token } = response.data;
+      dFetch.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setData({ token });
       localStorage.setItem("@checkpoint-2:token", token);
     } catch (error) {
@@ -23,6 +24,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("@checkpoint-2:token");
     if (token) {
+      dFetch.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setData({ token });
     }
   }, []);

@@ -1,19 +1,17 @@
 import { useState } from "react";
 import styles from "./Navbar.module.css";
+import { useAuth } from "../hooks/auth";
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   /* const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   }; */
-
-
+  const { userToken, signOut } = useAuth();
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    //redirecionar para a página de login
+    signOut();
   };
 
   return (
@@ -21,7 +19,9 @@ const Navbar = () => {
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar navbar-dark bg-dark ou navbar-light bg-light*/}
       <nav
-        className={`navbar navbar-expand-sm ${darkMode ? "navbar-dark bg-dark" : "navbar-light bg-light"}`}
+        className={`navbar navbar-expand-sm ${
+          darkMode ? "navbar-dark bg-dark" : "navbar-light bg-light"
+        }`}
         aria-label="Third navbar example"
       >
         <div className="container">
@@ -53,16 +53,9 @@ const Navbar = () => {
                 </a>
               </li>
               <li className={`nav-item ${styles.navBarLink}`}>
-                {isLoggedIn ? (<button className={`btn ${darkMode ? "btn-dark" : "btn-light"} ${styles.btnStyle}`}
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-                ) : ( 
-                <a className="nav-link" href="/login">
-                  Login
-                  </a>
-                  )}
+                <a className="nav-link" href="/login" onClick={handleLogout}>
+                  {userToken ? "Logout" : "Login"}
+                </a>
 
                 {/* Se o usuário estiver logado, deverá aparecer um botão de logout
                 que vai apagar o token do localstorage.

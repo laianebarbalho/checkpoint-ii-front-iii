@@ -1,11 +1,16 @@
 import styles from "./Form.module.css";
 import { useState } from "react";
 import { useAuth } from "../hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const { signIn } = useAuth();
+  const navigate = useNavigate();
+  function goToHome() {
+    navigate("/home");
+  }
   const handleSubmit = (e) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
     //enviar os dados do formulário e enviá-los no corpo da requisição
@@ -19,6 +24,7 @@ const LoginForm = () => {
       username: login,
       password,
     });
+    goToHome();
   };
 
   return (

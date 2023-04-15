@@ -21,6 +21,10 @@ function AuthProvider({ children }) {
     }
   }
 
+  function signOut() {
+    localStorage.removeItem("@checkpoint-2:token");
+    setData({});
+  }
   useEffect(() => {
     const token = localStorage.getItem("@checkpoint-2:token");
     if (token) {
@@ -29,7 +33,7 @@ function AuthProvider({ children }) {
     }
   }, []);
   return (
-    <AuthContext.Provider value={{ signIn, userToken: data.token }}>
+    <AuthContext.Provider value={{ signIn, userToken: data.token, signOut }}>
       {children}
     </AuthContext.Provider>
   );

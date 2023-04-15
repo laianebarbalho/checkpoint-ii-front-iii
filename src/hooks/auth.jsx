@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import dFetch from "../axios/config";
 
 export const AuthContext = createContext({});
@@ -14,11 +14,18 @@ function AuthProvider({ children }) {
       });
       const { token } = response.data;
       setData({ token });
+      localStorage.setItem("@checkpoint-2:token", token);
     } catch (error) {
-      console.log("error", error);
+      alert("Erro ao tentar logar");
     }
   }
 
+  useEffect(() => {
+    const token = localStorage.getItem("@checkpoint-2:token");
+    if (token) {
+      setData({ token });
+    }
+  }, []);
   return (
     <AuthContext.Provider value={{ signIn, userToken: data.token }}>
       {children}

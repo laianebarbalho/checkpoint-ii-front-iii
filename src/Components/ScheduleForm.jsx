@@ -5,6 +5,10 @@ const ScheduleForm = () => {
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
     //e pacientes e carregar os dados em 2 estados diferentes
+
+
+
+
   }, []);
 
   const handleSubmit = (event) => {

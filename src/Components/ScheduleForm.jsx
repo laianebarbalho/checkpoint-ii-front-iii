@@ -2,8 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./ScheduleForm.module.css";
 import dFetch from "../axios/config";
 import { useNavigate } from "react-router-dom";
+import {ThemeContext} from "../context/theme-context"
 
 const ScheduleForm = () => {
+
+  const {darkMode} = useContext(ThemeContext);
   const [dadosDentistas, setDadosDentistas] = useState(null);
   const [dadosPacientes, setDadosPacientes] = useState(null);
   const [dentista, setDentista] = useState(null);
@@ -72,7 +75,7 @@ const ScheduleForm = () => {
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`text-center container}`}>
+      <div className={`text-center container ${darkMode && 'cardDark'}`}>
         <form onSubmit={handleSubmit}>
           <div className={`row ${styles.rowSpacing}`}>
             <div className="col-sm-12 col-lg-6">

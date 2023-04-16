@@ -1,7 +1,10 @@
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme-context";
 
 const Card = ({data}) => {
+  const {darkMode} = useContext(ThemeContext);
   console.log(data);
 
   return (
@@ -10,7 +13,7 @@ const Card = ({data}) => {
     
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`card`}>
+      <div className={`card ${darkMode && styles.cardDark}`}>
         <img
           className="card-img-top"
           src="/images/doctor.jpg"
@@ -20,7 +23,7 @@ const Card = ({data}) => {
           {/* Na linha seguinte o link deverá utilizar a matricula, nome e sobrenome do dentista
           que vem da API */}
           <Link to={`/dentista/${data.matricula}`}>
-            <h5 className={`card-title ${styles.title}`}>{data.nome} {data.sobrenome}  </h5>
+            <h5 className={`card-title ${styles.title}`}>{`${data.nome} ${data.sobrenome}`}</h5>
           </Link>
         </div>
       </div>

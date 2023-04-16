@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "./Navbar.module.css";
 import { useAuth } from "../hooks/auth";
+import { ThemeContext } from "../context/theme-context";
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  // const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, changeTheme } = useContext(ThemeContext);
   //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   /* const toggleDarkMode = () => {
@@ -76,10 +78,9 @@ const Navbar = () => {
                   {☀ 🌙{" "}
                 </button> */}
                 <button
-                  className={`btn ${
-                    darkMode ? "btn-dark" : "btn-light"
-                  } $styles.btnStyle`}
-                  onClick={() => setDarkMode(!darkMode)}
+                  className={`${darkMode ? "btn-dark" : "btn btn-light"} ${styles.btnStyle
+                    }`}
+                  onClick={changeTheme}
                 >
                   {darkMode ? " ☀" : "🌙 "}
                 </button>
